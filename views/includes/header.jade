@@ -1,0 +1,5 @@
+- if (typeof user !== 'undefined')
+	span Welcome, #{user.name.first}&nbsp;&nbsp;
+	a(href='/logout', title='Logout') Logout
+- else
+	a(href='/login', title='Login') Login
