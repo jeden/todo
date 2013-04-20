@@ -22,8 +22,20 @@ exports.register = (app, passport) ->
 	app.get '/register', auth.register
 	app.post '/doRegister', auth.doRegister
 
-	# Rest APIs
-	app.get '/api/tasks', todo.list
-	app.put '/api/tasks/', todo.add
-	app.post '/api/tasks/:id', todo.update
-	app.delete '/api/tasks/:id', todo.delete
+	###
+	Web App REST APIs
+	Using form authentication
+	###
+	app.get '/backoffice/api/tasks', auth.isAuthenticated, todo.list
+	app.put '/backoffice/api/tasks', auth.isAuthenticated, todo.add
+	app.post '/backoffice/api/tasks/:taskId', auth.isAuthenticated, todo.update
+	app.delete '/backoffice/api/tasks/:taskId', auth.isAuthenticated, todo.delete
+
+	###
+	Public Rest APIs
+	Using basic HTTP authentication
+	###
+	app.get '/api/tasks', passport.authenticate('basic'), todo.list
+	app.put '/api/tasks', passport.authenticate('basic'), todo.add
+	app.post '/api/tasks/:taskId', passport.authenticate('basic'), todo.update
+	app.delete '/api/tasks/:taskId', passport.authenticate('basic'), todo.delete

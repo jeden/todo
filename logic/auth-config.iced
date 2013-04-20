@@ -33,11 +33,11 @@ authenticate = (username, password, done) ->
 		done(null, false, { message: 'Invalid username or password'} )
 
 
-# apiStrategy = new BasicStrategy authenticate
+apiStrategy = new BasicStrategy authenticate
 formStrategy = new LocalStrategy authenticate
 
 passport.serializeUser (user, done) ->
-	done null, user.id
+	done null, user._id
 
 passport.deserializeUser (id, done) ->
 	userManager = new UserManager dal
@@ -48,3 +48,4 @@ passport.deserializeUser (id, done) ->
 		done(new Error "User #{id} not found")
 
 passport.use(formStrategy)
+passport.use(apiStrategy)

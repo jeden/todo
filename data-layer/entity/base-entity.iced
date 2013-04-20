@@ -4,16 +4,9 @@ All right reserved
 ###
 
 class exports.BaseEntity
-	@FIELD_ID = '_id'
-
 	constructor: (entity) ->
-		@id = this._getId(entity)
+		@_id = entity._id
 
-	_getId: (entity) ->
-		if entity.id?
-			@id = entity.id
-		else if entity[BaseEntity.FIELD_ID]?
-			@id = entity[BaseEntity.FIELD_ID]
 	###
 	Return a dictionary made up of all non null class properties
 	###

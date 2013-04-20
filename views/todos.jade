@@ -1,47 +1,52 @@
 extends layout
 
 block head
+	script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.0.6/angular-resource.min.js')
 	script(src='/scripts/tasks.js')
 
 block content
-	.row(ng-controller='TaskController')
-		.span6
-			table.table.table-hover.table-striped
-				tr(ng-repeat='task in tasks')
-					td(nowrap)
-						input(type='checkbox', ng-model='task.completed', ng-click='changeTaskStatus(task.id)')
-					td {{task.description}}
-					td(nowrap ng-switch='task.priority')
-						i.icon-arrow-down(ng-switch-when='1', title='Low')
-						i.icon-minus(ng-switch-when='2', title='Normal')
-						i.icon-arrow-up(ng-switch-when='3', title='High')
-						i.icon-circle-arrow-up.text-error(ng-switch-when='4', title='Critical')
-					td(nowrap)
-						button.btn.btn-small(ng-click='editTask($event, task.id)')
-							i.icon-edit
-						button.btn.btn-small(ng-click='deleteTask($event, task.id)')
-							i.icon-remove
+	div(ng-controller='TaskController')
+		.span7.well
+			fieldset
+				legend Tasks
+				table.table.table-hover.table-striped
+					tr(ng-repeat='task in tasks')
+						td(nowrap)
+							input(type='checkbox', ng-model='task.completed', ng-click='changeTaskStatus(task._id)')
+						td(nowrap ng-switch='task.priority')
+							i.icon-arrow-down(ng-switch-when='1', title='Low')
+							i.icon-minus(ng-switch-when='2', title='Normal')
+							i.icon-arrow-up(ng-switch-when='3', title='High')
+							i.icon-circle-arrow-up.text-error(ng-switch-when='4', title='Critical')
+						td(width='100%', class='taskcompleted-{{task.completed}}') {{task.description}}
+						td(nowrap)
+							button.btn.btn-small(ng-click='editTask($event, task._id)')
+								i.icon-edit
+							button.btn.btn-small(ng-click='deleteTask($event, task._id)')
+								i.icon-remove
 
-		.span6
+		.span5.well.well-small
 			form.form-horizontal(ng-submit='saveTask()')
-				hidden(id='id', ng-model='editId')
-				.control-group
-					label.control-label(for='description') Task description
-					.controls
-						input.span5(type='text', id='description', placeholder='Enter the task...', ng-model='editDescription')
-				.control-group
-					label.control-label(for='priority') Priority
-					.controls
-						select.input-small(ng-model='editPriority')
-							option(value='4') Critical
-							option(value='3') High
-							option(value='2') Normal
-							option(value='1') Low
-				.control-group(ng-hide='isNewTask()')
-					label.control-label(for='completed') Completed
-					.controls
-						input(type='checkbox', id='completed', ng-model='editCompleted')
-				.control-group
-					.controls
-						button.btn.btn-primary(type='submit') Save
-						button.btn(type='button', ng-click='cancelEditTask()') Cancel
+				fieldset
+					legend Edit Task
+					hidden(id='id', ng-model='editId')
+					.control-group
+						label.control-label(for='description') Task description
+						.controls
+							input(type='text', id='description', placeholder='Enter the task...', ng-model='editDescription')
+					.control-group
+						label.control-label(for='priority') Priority
+						.controls
+							select.input-small(ng-model='editPriority')
+								option(value='4') Critical
+								option(value='3') High
+								option(value='2') Normal
+								option(value='1') Low
+					.control-group(ng-hide='isNewTask()')
+						label.control-label(for='completed') Completed
+						.controls
+							input(type='checkbox', id='completed', ng-model='editCompleted')
+					.control-group
+						.controls
+							button.btn.btn-primary(type='submit') Save
+							button.btn(type='button', ng-click='cancelEditTask()') Cancel

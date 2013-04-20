@@ -3,12 +3,15 @@ html(ng-app)
 	head
 		title= title
 		link(rel='stylesheet', href='/bootstrap/css/bootstrap.min.css')
+		link(rel='stylesheet', href='/css/style.css')
 		script(src='http://code.jquery.com/jquery.js')
 		script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.0.6/angular.min.js')
 		script(src='/bootstrap/js/bootstrap.min.js')
 		block head
 	body
-		.container
-			include includes/header
-			block content
-			include includes/footer
+		include includes/header
+		#wrap
+			#main.container-fluid
+				.row-fluid
+					block content
+		include includes/footer
