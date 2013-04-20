@@ -4,5 +4,12 @@ All right reserved
 ###
 
 class exports.TaskManager
-	constructor: (@db) ->
+	constructor: (@dal, @userId) ->
 		# Empty
+
+	getAllTasks: (onCompletion) ->
+		await @dal.task_adapter.findByUser @userId, defer outcome
+		tasks = []
+		if outcome.succeeded()
+			tasks = outcome.getResults()
+		onCompletion tasks

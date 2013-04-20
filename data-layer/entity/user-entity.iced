@@ -20,8 +20,7 @@ class exports.UserEntity extends BaseEntity
 	@__REGEX_USERNAME = /^[a-zA-Z\-_\.]+$/;
 
 	constructor: (user) ->
-		super()
-		@id = this._getId(user)
+		super(user)
 		@hash = user.hash if user.hash?
 		@salt = user.salt if user.salt?
 		@username = user.username

@@ -6,6 +6,9 @@ All right reserved
 class exports.BaseEntity
 	@FIELD_ID = '_id'
 
+	constructor: (entity) ->
+		@id = this._getId(entity)
+
 	_getId: (entity) ->
 		if entity.id?
 			@id = entity.id

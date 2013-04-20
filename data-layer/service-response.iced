@@ -22,7 +22,7 @@ class exports.ServiceResponse
 		@__affectedRows = 0
 		if @__results?
 			if @__results instanceof Array
-				@__affectedRows = __results.length
+				@__affectedRows = @__results.length
 			else
 				@__affectedRows = 1
 

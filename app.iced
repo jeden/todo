@@ -24,7 +24,7 @@ dbUrl = require('./conf').MONGO_DB_URL
 console.log("Connecting to MongoDB: #{dbUrl}")
 dbCollections = [
 	'users'
-	'todos'
+	'tasks'
 ]
 db = mongojs.connect dbUrl, dbCollections
 

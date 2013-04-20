@@ -1,3 +1,47 @@
 extends layout
 
+block head
+	script(src='/scripts/tasks.js')
+
 block content
+	.row(ng-controller='TaskController')
+		.span6
+			table.table.table-hover.table-striped
+				tr(ng-repeat='task in tasks')
+					td(nowrap)
+						input(type='checkbox', ng-model='task.completed', ng-click='changeTaskStatus(task.id)')
+					td {{task.description}}
+					td(nowrap ng-switch='task.priority')
+						i.icon-arrow-down(ng-switch-when='1', title='Low')
+						i.icon-minus(ng-switch-when='2', title='Normal')
+						i.icon-arrow-up(ng-switch-when='3', title='High')
+						i.icon-circle-arrow-up.text-error(ng-switch-when='4', title='Critical')
+					td(nowrap)
+						button.btn.btn-small(ng-click='editTask($event, task.id)')
+							i.icon-edit
+						button.btn.btn-small(ng-click='deleteTask($event, task.id)')
+							i.icon-remove
+
+		.span6
+			form.form-horizontal(ng-submit='saveTask()')
+				hidden(id='id', ng-model='editId')
+				.control-group
+					label.control-label(for='description') Task description
+					.controls
+						input.span5(type='text', id='description', placeholder='Enter the task...', ng-model='editDescription')
+				.control-group
+					label.control-label(for='priority') Priority
+					.controls
+						select.input-small(ng-model='editPriority')
+							option(value='4') Critical
+							option(value='3') High
+							option(value='2') Normal
+							option(value='1') Low
+				.control-group(ng-hide='isNewTask()')
+					label.control-label(for='completed') Completed
+					.controls
+						input(type='checkbox', id='completed', ng-model='editCompleted')
+				.control-group
+					.controls
+						button.btn.btn-primary(type='submit') Save
+						button.btn(type='button', ng-click='cancelEditTask()') Cancel
