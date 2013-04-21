@@ -24,30 +24,35 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 DEALINGS IN THE SOFTWARE.
 ###
 
-ServiceResponse = require('../service-response').ServiceResponse
-BaseAdapter = require('./base-adapter').BaseAdapter
-UserEntity = require('../entity/user-entity').UserEntity
+BaseEntity = require('./base-entity').BaseEntity
 
-class exports.UserAdapter extends BaseAdapter
-	constructor: (@db) ->
-		super 'users'
+class exports.TaskEntity extends BaseEntity
+	@VALIDATION_OK = 0
+	@VALIDATION_USERID_MISSING = 1
+	@VALIDATION_DESCRIPTION_MISSING = 2
+
+	@PRIORITY_LOW = 1
+	@PRIORITY_NORMAL = 2
+	@PRIORITY_HIGH = 3
+	@PRIORITY_CRITICAL = 4
+
+	constructor: (task) ->
+		super(task)
+		@userId = task.userId
+		@description = task.description
+		@priority = if task.priority? then task.priority else @PRIORITY_NORMAL
+		@completed = if task.completed? then task.completed else 0
+		@archived = task.archived if task.archived?
+		@createdOn = if task.createdOn? then task.createdOn else new Date()
+		@completedOn = task.completedOn if task.completedOn?
 
 	###
-      Insert a new user
+      Validate the task fields
 	###
-	insertUser: (user, onCompletion) ->
-		if not user instanceof UserEntity
-			throw "Not an instance of User: #{user}"
-
-		userToSave = user.toDictionary()
-		@db.users.save userToSave, (err, saved) ->
-			outcome = new ServiceResponse(err, saved)
-			onCompletion(outcome)
-
-	###
-	Find a user by username
-      ###
-	fetchByUsername: (username, onCompletion) ->
-		@db.users.findOne username: username, (err, user) ->
-			outcome = new ServiceResponse(err, user)
-			onCompletion(outcome)
+	validate: () ->
+		err = TaskEntity.VALIDATION_OK
+		if not @userId?
+			err = TaskEntity.VALIDATION_USERID_MISSING
+		else if not @description?
+			err = TaskEntity.VALIDATION_DESCRIPTION_MISSING
+		return err

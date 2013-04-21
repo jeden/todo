@@ -1,7 +1,15 @@
-- if (typeof user !== 'undefined')
-	span Welcome, #{user.name.first}&nbsp;&nbsp;
-	a(href='/logout', title='Logout') Logout
-- else
-	a(href='/login', title='Login') Login&nbsp;&nbsp;
-	a(href='/register', title='Register') Register
+header.header.well.well-large
+	- if (typeof user !== 'undefined')
+		span Welcome,&nbsp;
+		- if (user.name.first.length > 0)
+			| #{user.name.first}
+		- else
+			| #{user.username}
+		| &nbsp;&nbsp;
+		.pull-right
+			a(href='/logout', title='Logout') Logout
+	- else
+		a(href='/login', title='Login') Login
+		.pull-right
+			a(href='/register', title='Register') Register
 
