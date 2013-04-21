@@ -1,5 +1,5 @@
 {
-  "name": "application-name",
+  "name": "todo",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -7,6 +7,27 @@
   },
   "dependencies": {
     "express": "3.2.0",
-    "jade": "*"
-  }
+    "jade": "*",
+	"iced-coffee-script": "*",
+	"mongojs": "*",
+	"passport": "*",
+	"passport-http": "*",
+	"passport-local": "*",
+	"winston": "*"
+  },
+  "description": "ERROR: No README.md file found!",
+  "main": "app.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jeden/todo"
+  },
+  "keywords": [
+    "nodejs",
+    "jade",
+    "angularjs",
+    "coffeescript"
+  ],
+  "author": "Antonio Bello",
+  "license": "MIT"
 }
