@@ -48,9 +48,16 @@ exports.update = (req, res) ->
 	dal = req.app.dal
 	userId = req.user._id
 	task = req.body.task
+
 	if not task?
 		res.json {}, 412
 		return
+
+	if not req.params.taskId?
+		res.json {}, 412
+		return
+
+	task._id = req.params.taskId
 
 	taskManager = new TaskManager(dal, userId)
 	await taskManager.updateTask task, defer outcome

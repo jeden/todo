@@ -2,7 +2,7 @@ header.header.well.well-large
 	- if (typeof user !== 'undefined')
 		span Welcome,&nbsp;
 		- if (user.name.first.length > 0)
-			| sa #{user.name.first}
+			| #{user.name.first}
 		- else
 			| #{user.username}
 		| &nbsp;&nbsp;

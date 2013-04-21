@@ -10,7 +10,7 @@ block content
 			fieldset
 				legend Tasks
 				table.table.table-hover.table-striped
-					tr(ng-repeat='task in tasks')
+					tr(ng-repeat="task in tasksArray | orderBy:sortFunc")
 						td(nowrap)
 							input(type='checkbox', ng-model='task.completed', ng-click='changeTaskStatus(task._id)')
 						td(nowrap ng-switch='task.priority')
