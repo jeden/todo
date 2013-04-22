@@ -3,6 +3,12 @@ todo
 
 Simple web based task management built in node.js and using jade + angularjs
 
+Tested on node.js 0.8.14
+
+TODO:
+* Client side validation
+* Client side error notification
+
 MIT License
 ===========
 

@@ -4,3 +4,4 @@ npm-debug.log
 
 *.js
 !public/bootstrap/js/*.js
+!public/scripts/*.js

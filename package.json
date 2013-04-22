@@ -8,14 +8,13 @@
   "dependencies": {
     "express": "3.2.0",
     "jade": "*",
-	"iced-coffee-script": "*",
-	"mongojs": "*",
-	"passport": "*",
-	"passport-http": "*",
-	"passport-local": "*",
-	"winston": "*"
+    "iced-coffee-script": "*",
+    "mongojs": "*",
+    "passport": "*",
+    "passport-http": "*",
+    "passport-local": "*",
+    "winston": "*"
   },
-  "description": "ERROR: No README.md file found!",
   "main": "app.js",
   "devDependencies": {},
   "repository": {
@@ -29,5 +28,7 @@
     "coffeescript"
   ],
   "author": "Antonio Bello",
-  "license": "MIT"
+  "license": "MIT",
+  "readmeFilename": "README.md",
+  "description": "todo ===="
 }
